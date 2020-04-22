@@ -5,7 +5,7 @@
 
 function view(string $name, $vars = []) {
     extract($vars);
-    $file = "views/$name.tpl.php";
+    $file = VIEWS_DIR.$name.".tpl.php";
     if (file_exists($file)) {
         require $file;
     } else {
@@ -16,9 +16,9 @@ function view(string $name, $vars = []) {
 
 function controller(array $url) {
     if (empty($url)) {
-        require "controllers/home.php";
+        require CONTROLLERS_DIR."home.php";
     } elseif (isset($url['url'])) {
-        $file = "controllers/" . $url['url'] . ".php";
+        $file = CONTROLLERS_DIR . $url['url'] . ".php";
         if (file_exists($file)) {
             require $file;
         } else {

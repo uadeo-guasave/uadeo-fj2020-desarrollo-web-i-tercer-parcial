@@ -1,5 +1,5 @@
 <?php
-require "models/users.php";
+require MODELS_DIR."users.php";
 
 $users = getAllUsers();
 
