@@ -1,2 +1,4 @@
 <?php
-view("home", ["title" => "Vista Home"]);
+function index() {
+    view("home", ["title" => "Vista Home"]);
+}

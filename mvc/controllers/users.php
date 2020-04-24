@@ -1,6 +1,12 @@
 <?php
 require MODELS_DIR."users.php";
 
-$users = getAllUsers();
+// http://mvcfriends.com/controller/action
+function index() {
+    $users = getAllUsers();
+    view("users", ["title" => "Vista Users", "users" => $users]);
+}
 
-view("users", ["title" => "Vista Users", "users" => $users]);
+function save() {}
+function create() {}
+function delete() {}

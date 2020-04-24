@@ -1,2 +1,4 @@
 <?php
-view("about", ["title" => "Vista About"]);
+function index() {
+    view("about", ["title" => "Vista About"]);
+}
