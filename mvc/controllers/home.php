@@ -1,4 +1,9 @@
 <?php
+namespace MVC\Controllers;
+use App\Libs\View;
+
 function index() {
-    view("home", ["title" => "Vista Home"]);
+    View::make("home", ["title" => "Vista Home"]);
 }
+
+index();

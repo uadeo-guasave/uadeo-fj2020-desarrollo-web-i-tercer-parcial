@@ -9,3 +9,6 @@ define("CONTROLLERS_DIR", __DIR__."/controllers/");
 define("VIEWS_DIR", __DIR__."/views/");
 // Models
 define("MODELS_DIR", __DIR__."/models/");
+
+// App dir /usr/local/var/www/tercer-parcial/mvc
+define("APP_DIR", __DIR__."/");
