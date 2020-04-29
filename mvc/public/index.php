@@ -3,4 +3,7 @@ require "../config.php";
 require APP_DIR."helpers.php";
 require APP_DIR."app/autoload.php";
 
-controller($_GET);
+use App\Libs\Request;
+
+// controller($_GET);
+Request::call($_GET);

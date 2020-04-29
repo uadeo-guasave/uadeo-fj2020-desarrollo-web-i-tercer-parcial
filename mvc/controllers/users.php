@@ -7,6 +7,8 @@ function index() {
     view("users", ["title" => "Vista Users", "users" => $users]);
 }
 
+index();
+function all() {}
 function save() {}
 function create() {}
 function delete() {}
