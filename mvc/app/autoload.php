@@ -3,6 +3,7 @@ return
     spl_autoload_register(function ($classname) {
         // exit($classname);
         // App\Libs\View
+        // var_dump($classname);
         $path = strtolower($classname);
         // app\libs\view
         $path = str_replace("\\", "/", $path);
