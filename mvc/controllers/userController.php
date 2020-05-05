@@ -1,14 +1,23 @@
 <?php
+namespace Controllers;
+use App\Libs\View;
+
 require MODELS_DIR."users.php";
 
-// http://mvcfriends.com/controller/action
-function index() {
-    $users = getAllUsers();
-    view("users", ["title" => "Vista Users", "users" => $users]);
+class UserController {
+    // http://mvcfriends.com/controller/action
+    public static function index() {
+        $users = getAllUsers();
+        View::make("user.index", ["title" => "Vista Users", "users" => $users]);
+    }
+
+    public static function login() {
+        View::make("user.login", ["title"=>"Inicio de sesión"]);
+    }
+
+    public static function all() {}
+    public static function save() {}
+    public static function create() {}
+    public static function delete() {}
 }
 
-index();
-function all() {}
-function save() {}
-function create() {}
-function delete() {}

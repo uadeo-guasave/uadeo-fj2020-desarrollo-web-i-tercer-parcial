@@ -2,9 +2,23 @@
 namespace App\Libs;
 
 class View {
-    static function make(string $name, $vars = []) {
+    public static function make(string $name, $vars = []) {
         extract($vars);
-        $file = VIEWS_DIR.$name.".tpl.php";
+        // segmentar el nombre de la vista Ej: user.index
+        $seg = explode(".", $name);
+        // ["user", "index"]
+        if (count($seg) > 1) {
+            $view_name = array_pop($seg);
+            // "index"
+            $view_dirs = implode("/", $seg);
+            // "user"
+            $view_file = $view_dirs . "/" . $view_name;
+            // "user/index"
+        } else {
+            $view_file = $name;
+        }
+
+        $file = VIEWS_DIR . $view_file . ".tpl.php";
         if (file_exists($file)) {
             require $file;
         } else {

@@ -27,3 +27,11 @@ function controller(array $url) {
         }
     }
 }
+
+function incLayout(string $layout, array $vars = null) {
+    if ($vars) {
+        extract($vars);
+    }
+    require_once VIEWS_DIR . "layout/" . $layout . ".tpl.php";
+    // views/layout/header.tpl.php
+}

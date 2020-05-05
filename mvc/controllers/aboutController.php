@@ -1,9 +1,10 @@
 <?php
 namespace Controllers;
+use App\Libs\View;
 
 class AboutController {
     public static function index() {
-        view("about", ["title" => "Vista About"]);
+        View::make("about", ["title" => "Vista About"]);
     }
 
 }
