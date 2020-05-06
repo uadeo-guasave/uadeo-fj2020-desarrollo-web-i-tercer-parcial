@@ -8,8 +8,7 @@ class Request {
     protected ?string $controller_action;
     protected string $controller_file;
 
-    public function __construct($url)
-    {
+    public function __construct($url) {
         // mvcfriends.com/
         if (empty($url)) {
             $this->url = "home";
@@ -24,11 +23,14 @@ class Request {
         // var_dump($this->controller_name); // home
         // var_dump($this->controller_action); // index
         // exit();
-        $call = "Controllers\\";
-        $call .= ucfirst($this->controller_name)."Controller::";
-        $call .= $this->controller_action;
-        // $call = "Controllers\HomeController::index";
-        call_user_func($call);
+        $classname =
+            "Controllers\\" . ucfirst($this->controller_name) . "Controller";
+        // $classname = "Controllers\HomeController";
+        $controller = new $classname;
+        // TODO: como obtener los parametros
+        // TODO: como manipular los métodos de las peticiones
+        // TODO: como definir y utilizar rutas de la app
+        call_user_func_array([$controller, $this->controller_action], [1]);
     }
 
     protected function getControllerNameAndAction() {
@@ -42,13 +44,14 @@ class Request {
         // user/all = ["user", "all"]
         $this->controller_name = array_shift($seg);
         // ["all"]
-        if (!$this->controller_action = array_shift($seg)) {
+        if (!($this->controller_action = array_shift($seg))) {
             $this->controller_action = "index";
         }
     }
 
     protected function getControllerFile() {
-        $this->controller_file = CONTROLLERS_DIR . $this->controller_name . "Controller.php";
+        $this->controller_file =
+            CONTROLLERS_DIR . $this->controller_name . "Controller.php";
     }
 
     public function call($url) {

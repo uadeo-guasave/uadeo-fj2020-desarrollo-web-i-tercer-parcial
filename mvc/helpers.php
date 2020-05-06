@@ -5,7 +5,7 @@
 
 function view(string $name, $vars = []) {
     extract($vars);
-    $file = VIEWS_DIR.$name.".tpl.php";
+    $file = VIEWS_DIR . $name . ".tpl.php";
     if (file_exists($file)) {
         require $file;
     } else {
@@ -16,7 +16,7 @@ function view(string $name, $vars = []) {
 
 function controller(array $url) {
     if (empty($url)) {
-        require CONTROLLERS_DIR."home.php";
+        require CONTROLLERS_DIR . "home.php";
     } elseif (isset($url['url'])) {
         $file = CONTROLLERS_DIR . $url['url'] . ".php";
         if (file_exists($file)) {
@@ -34,4 +34,8 @@ function incLayout(string $layout, array $vars = null) {
     }
     require_once VIEWS_DIR . "layout/" . $layout . ".tpl.php";
     // views/layout/header.tpl.php
+}
+
+function url(string $url) {
+    return "http://".$_SERVER["HTTP_HOST"] . "/" . $url;
 }
