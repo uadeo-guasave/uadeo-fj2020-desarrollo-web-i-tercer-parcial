@@ -9,13 +9,18 @@ class Request {
     protected string $controller_file;
 
     public function __construct($url) {
-        // mvcfriends.com/
+        // mvcfriends.com/user/edit/1
         if (empty($url)) {
             $this->url = "home";
         } else {
             $this->url = $url["url"];
         }
-        $this->getControllerNameAndAction();
+
+        // segmentar la url
+        $seg = explode("/", $this->url);
+
+        $this->getControllerNameAndAction($seg);
+        // $this->url = ["1"]
         $this->getControllerFile();
         // var_dump($this->controller_file);
         // exit();
@@ -30,17 +35,19 @@ class Request {
         // TODO: como obtener los parametros
         // TODO: como manipular los métodos de las peticiones
         // TODO: como definir y utilizar rutas de la app
+        var_dump($seg);
+        exit();
         call_user_func_array([$controller, $this->controller_action], [1]);
     }
 
-    protected function getControllerNameAndAction() {
+    protected function getControllerNameAndAction(&$seg) {
         // segmentar la url
         // mvcfriends.com
         // mvcfriends.com/user/all
         // mvcfriends.com/user/edit/1
         // mvcfriends.com/user/save
         // mydomain.com/controller/action/param
-        $seg = explode("/", $this->url);
+        
         // user/all = ["user", "all"]
         $this->controller_name = array_shift($seg);
         // ["all"]
