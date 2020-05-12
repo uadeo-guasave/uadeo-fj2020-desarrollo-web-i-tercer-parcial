@@ -9,35 +9,32 @@ class Request {
     protected string $controller_file;
 
     public function __construct($url) {
-        // mvcfriends.com/user/edit/1
         if (empty($url)) {
             $this->url = "home";
         } else {
             $this->url = $url["url"];
         }
 
-        // segmentar la url
         $seg = explode("/", $this->url);
 
         $this->getControllerNameAndAction($seg);
-        // $this->url = ["1"]
+
         $this->getControllerFile();
-        // var_dump($this->controller_file);
-        // exit();
-        // Controllers\HomeController::index();
-        // var_dump($this->controller_name); // home
-        // var_dump($this->controller_action); // index
-        // exit();
         $classname =
             "Controllers\\" . ucfirst($this->controller_name) . "Controller";
-        // $classname = "Controllers\HomeController";
+            
+        $route = $this->controller_name."/".$this->controller_action;
+        $controller_param = Router::exists($route);
+        if ($controller_param !== false) {
+            if ($controller_param != "") {
+                $param = [$controller_param => array_shift($seg)];
+            } else {
+                $param = null;
+            }
+        }
+
         $controller = new $classname;
-        // TODO: como obtener los parametros
-        // TODO: como manipular los métodos de las peticiones
-        // TODO: como definir y utilizar rutas de la app
-        var_dump($seg);
-        exit();
-        call_user_func_array([$controller, $this->controller_action], [1]);
+        call_user_func_array([$controller, $this->controller_action], compact("param"));
     }
 
     protected function getControllerNameAndAction(&$seg) {
